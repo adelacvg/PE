@@ -1,6 +1,8 @@
 #(2^60)-1==k*m m is odd
 import math
 import random
+import numpy as np
+import itertools
 def sieve(limit):
     a = [True]*limit
     a[0] = a[1]=False
@@ -52,7 +54,7 @@ def isPrime(n,k):
 # integer that holds condition
 # A ^ k(mod N ) = 1
 def multiplicativeOrder(A, N) :
-    if (GCD(A, N ) != 1) :
+    if (math.gcd(A, N ) != 1) :
         return -1
     # result store power of A that rised
     # to the power N-1
@@ -67,6 +69,8 @@ def multiplicativeOrder(A, N) :
         # increment power
         K = K + 1
     return -1
+def shuffle_cycle_len(n):
+    return multiplicativeOrder(2,n-1)
 number=(1<<60)-1
 v=[]
 #number=10403
@@ -89,3 +93,7 @@ for i in v:
     t*=i
 print(t)
 ans=0
+for l in range(1,len(v)):
+    for i in itertools.combinations(v,l):
+        pro = np.prod(i)
+
