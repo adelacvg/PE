@@ -1,8 +1,9 @@
 #(2^60)-1==k*m m is odd
-import math
 import random
 import numpy as np
 import itertools
+import math
+
 def sieve(limit):
     a = [True]*limit
     a[0] = a[1]=False
@@ -70,7 +71,7 @@ def multiplicativeOrder(A, N) :
         K = K + 1
     return -1
 def shuffle_cycle_len(n):
-    return multiplicativeOrder(2,n-1)
+    return multiplicativeOrder(2,n)
 number=(1<<60)-1
 v=[]
 #number=10403
@@ -93,7 +94,11 @@ for i in v:
     t*=i
 print(t)
 ans=0
-for l in range(1,len(v)):
+se=set()
+for l in range(1,len(v)+1):
     for i in itertools.combinations(v,l):
         pro = np.prod(i)
-
+        if shuffle_cycle_len(pro)==60 and pro not in se:
+            ans+=pro+1
+            se.add(pro)
+print(ans)
