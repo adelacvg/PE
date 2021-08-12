@@ -1,0 +1,47 @@
+from itertools import combinations
+
+comb = list(combinations([0,1,2,3,4,5,6,7,8,9],6))
+valid = [tuple(map(int, list(str(s*s).zfill(2)))) for s in range(1,10)]
+def isvalid(comb1,comb2):
+    #print(list(zip(comb1,comb2)))
+    combx = [(i,j) for i in comb1 for j in comb2]+[(i,j) for i in comb2 for j in comb1]
+    combx = list(itertools.product(a, b))
+    #combx = list(zip(comb1,comb2)) + list(zip(comb2,comb1))
+    print(combx)
+    for i in valid:
+        if i not in combx:
+            print(i)
+            print(1)
+            return False
+    if (4,9) not in combx and (4,6) not in combx:
+        print(2)
+        return False
+    if (6,4) not in combx and (9,4) not in combx:
+        print(3)
+        return False
+    if (1,6) not in combx and (1,9) not in combx:
+        print(4)
+        return False
+    if (0,9) not in combx and (0,6) not in combx:
+        print(5)
+        return False
+    print(comb1,comb2)
+    return True
+res=0
+'''
+for i in range(len(comb)):
+    for j in range(i+1,len(comb)):
+        if isvalid(comb[i],comb[j])==True:
+                res+=1
+'''
+a = [0,5,6,7,8,9]
+b = [1,2,3,4,8,9]
+a1 = [0,5,6,7,8,9]
+b1 = [1,2,3,4,6,7]
+print(isvalid(a,b))
+valid.remove((4,9))
+valid.remove((6,4))
+valid.remove((1,6))
+valid.remove((0,9))
+print(list(valid))
+print(res)
